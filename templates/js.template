@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAMES};
+    root ${ROOT_DIRECTORY};
+    index index.html index.htm;
+
+    location / {
+        try_files ${DOLLAR}uri /index.html${DOLLAR}is_args${DOLLAR}query_string;
+    }
+}

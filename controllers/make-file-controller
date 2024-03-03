@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/functions
+. "$(utils)"/printer
+
+FILE_PATH=$1
+
+$(library file-maker) "${FILE_PATH}"
+
+printInLightGreen "A field created on \"${FILE_PATH}\" path."

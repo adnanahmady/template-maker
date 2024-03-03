@@ -1,0 +1,5 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-..}"/utils/functions
+
+action "${1}" "${JS_COMMAND}" js-controller "${2}"

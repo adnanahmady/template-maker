@@ -1,0 +1,5 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-..}"/utils/functions
+
+action "${1}" "${FORCED_MAKE_FILE_COMMAND}" make-file-controller "${2}"

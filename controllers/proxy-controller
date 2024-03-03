@@ -1,0 +1,12 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/functions
+. "$(utils)"/printer
+
+TEMPLATE_PATH=$(template proxy)
+OUTPUT_PATH=$1
+INPUTS="Server names;Public crt path;Private crt path;Upstream;Log"
+
+$(library template-resolver) "${TEMPLATE_PATH}" "${OUTPUT_PATH}" "${INPUTS}"
+
+printInLightGreen "A configuration file created in \"${OUTPUT_PATH}\" path."

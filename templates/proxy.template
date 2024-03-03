@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAMES};
+
+    return 307 https://${DOLLAR}host${DOLLAR}request_uri;
+}
+
+upstream ${UPSTREAM}_upstream {
+    server ${UPSTREAM};
+}
+
+server {
+    listen 443 ssl;
+    server_name ${SERVER_NAMES};
+
+    ssl_certificate ${PUBLIC_CRT_PATH};
+    ssl_certificate_key ${PRIVATE_CRT_PATH};
+
+    location / {
+        proxy_pass http://${UPSTREAM}_upstream;
+        proxy_set_header Host ${DOLLAR}host;
+        proxy_set_header X-Real-IP ${DOLLAR}remote_addr;
+        proxy_set_header X-Forwarded-For ${DOLLAR}proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
+        proxy_pass_request_headers on;
+    }
+
+    access_log /var/log/nginx/${LOG}-access.log;
+    error_log /var/log/nginx/${LOG}-errors.log;
+}

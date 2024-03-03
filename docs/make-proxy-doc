@@ -1,0 +1,12 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+
+printInWhite "${PROXY_COMMAND:-proxy-maker}"
+space
+printInDark "Creates a nginx proxy configuration for you at the specified output path."
+newLine
+tab
+printInBlue "outputPath"
+tab
+printInDark "This argument has no name and you should only path the value."

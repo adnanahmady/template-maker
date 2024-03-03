@@ -1,0 +1,12 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+
+printInWhite "${FORCED_MAKE_FILE_COMMAND}"; space;
+printInDark "Creates a file in the given path."; newLine;
+tab; printInBlue "filePath"; tab;
+printInDark "The path containing the file name that should be created."; newLine
+tab; tab; printInBlue "description"; space
+printInDark "This argument has no name and you should only path the value.";
+newLine
+tab; tab; printInBlue 'e.g.'; space; printInWhite '('; printInDark '~/projects/maybe.txt'; printInWhite ')'

@@ -1,0 +1,23 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+
+FILE_PATH=$1
+
+createdPathIsRequired() {
+  printInRed "Error:"; space;
+  printInWhite "You need to set the create path"; printInWhite ".";
+  newLine
+}
+
+if [ -z "${FILE_PATH}" ]; then
+  createdPathIsRequired
+  exit;
+fi
+
+if [ -d "${FILE_PATH}" ]; then
+  rmdir "${FILE_PATH}"
+fi
+
+mkdir -p "$(dirname "${FILE_PATH}")"
+touch "${FILE_PATH}"

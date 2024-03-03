@@ -1,0 +1,53 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/functions
+. "$(utils)"/printer
+
+export DOLLAR=$
+
+TEMPLATE_PATH=$1
+OUTPUT_PATH=$2
+INPUTS=$3
+
+inputsIsRequired() {
+  printInRed "Error:"; space
+  printInWhite "You need to set the inputs path like"; space
+  printInBlueSky "\"you name;you family\""; printInWhite "."; newLine
+}
+
+if [ -z "$INPUTS" ]; then
+  inputsIsRequired
+  exit;
+fi
+
+if [ -z "$OUTPUT_PATH" ]; then
+  OUTPUT_PATH='output path'
+  INPUTS="${OUTPUT_PATH};${INPUTS}"
+fi
+
+if [ -z "$TEMPLATE_PATH" ]; then
+  TEMPLATE_PATH='template path'
+  INPUTS="${TEMPLATE_PATH};${INPUTS}"
+fi
+
+ADDR=$(echo "$INPUTS" | tr ' ' '_' | tr ';' "\n")
+
+toUppercase() {
+  echo "$1" | tr '[:lower:]' '[:upper:]'
+}
+
+makeTitle() {
+  echo "$1" | tr '_' ' '
+}
+
+while IFS= read -r item; do
+  title=$(makeTitle "$item")
+  printInBlueSky "$title: " >/dev/tty
+  read -r value </dev/tty
+  key=$(toUppercase "$item")
+  export "${key}"="${value}"
+done << EOL
+${ADDR}
+EOL
+$(library file-maker) "${OUTPUT_PATH}"
+envsubst < "${TEMPLATE_PATH}" > "${OUTPUT_PATH}"

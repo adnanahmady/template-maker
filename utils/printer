@@ -1,0 +1,63 @@
+#! /bin/sh
+
+whiteColor="\033[0m"
+blueColor="\033[38;5;039m"
+greenColor="\033[38;5;034m"
+redColor="\033[38;5;009m"
+orangeColor="\033[38;5;214m"
+blueSkyColor="\033[38;5;014m"
+lightGreenColor="\033[38;5;010m"
+darkColor="\033[38;5;245m"
+
+printString() {
+  printf "%b" "${1}" >/dev/tty
+}
+
+printInDark() {
+  printString "${darkColor}${1}${darkColor}"
+}
+
+newLine() {
+  printString "\n"
+}
+
+realTab() {
+  printString "\t"
+}
+
+# 4 spaces as tab, so on different terminals the tabs show properly
+tab() {
+  printString "    "
+}
+
+space() {
+  printString " "
+}
+
+printInWhite() {
+  printString "${whiteColor}${1}${whiteColor}"
+}
+
+printInBlue() {
+  printString "${blueColor}${1}${whiteColor}"
+}
+
+printInOrange() {
+  printString "${orangeColor}${1}${whiteColor}"
+}
+
+printInRed() {
+  printString "${redColor}${1}${whiteColor}"
+}
+
+printInBlueSky() {
+  printString "${blueSkyColor}${1}${whiteColor}"
+}
+
+printInLightGreen() {
+  printString "${lightGreenColor}${1}${whiteColor}"
+}
+
+printInGreen() {
+  printString "${greenColor}${1}${whiteColor}"
+}

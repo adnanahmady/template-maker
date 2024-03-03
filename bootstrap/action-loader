@@ -1,0 +1,15 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/commands
+
+for action in "${PROJECT_PATH:-$(dirname "$0")/..}"/actions/*; do
+  isHandled=$(${action} "$@")
+
+  if [ "" != "$isHandled" ]; then
+    newLine
+    exit;
+  fi
+done
+
+"${PROJECT_PATH:-$(dirname "$0")/..}"/bootstrap/help-loader

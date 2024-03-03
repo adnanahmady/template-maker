@@ -1,0 +1,19 @@
+#! /bin/sh
+
+FORCED_MAKE_FILE_COMMAND=make-file
+export FORCED_MAKE_FILE_COMMAND
+
+JS_YAML_COMMAND=make-js-yaml
+export JS_YAML_COMMAND
+
+JS_COMMAND=make-js-config
+export JS_COMMAND
+
+PHP_COMMAND=make-php-config
+export PHP_COMMAND
+
+PROXY_COMMAND=make-proxy
+export PROXY_COMMAND
+
+HELLO_COMMAND=hello
+export HELLO_COMMAND

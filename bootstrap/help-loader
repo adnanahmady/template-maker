@@ -1,0 +1,14 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+
+newLine
+printInBlue "Help information"
+newLine
+newLine
+
+for doc in "${PROJECT_PATH:-$(dirname "$0")/..}"/docs/*; do
+  ${doc}
+  newLine
+  newLine
+done

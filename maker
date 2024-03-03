@@ -1,0 +1,10 @@
+#! /bin/sh
+
+PROJECT_PATH="$(pwd)/$(dirname "$0")"
+export PROJECT_PATH
+DOLLAR="$"
+export DOLLAR
+
+"${PROJECT_PATH}"/bootstrap/action-loader "$@"
+
+

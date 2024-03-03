@@ -1,0 +1,5 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-..}"/utils/functions
+
+action "${1}" "${PROXY_COMMAND}" proxy-controller "${2}"

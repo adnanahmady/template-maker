@@ -1,0 +1,28 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAMES};
+    root ${ROOT_DIRECTORY};
+
+    index index.php index.html;
+    client_max_body_size 10000M;
+
+    location / {
+        try_files ${DOLLAR}uri /index.php${DOLLAR}is_args${DOLLAR}query_string;
+    }
+
+    location ~ \.php${DOLLAR} {
+        fastcgi_index index.php;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass ${UPSTREAM}:${UPSTREAM_PORT};
+        include fastcgi_params;
+        fastcgi_param HTTPS on;
+        fastcgi_param SERVER_PORT 443;
+        fastcgi_param SCRIPT_FILENAME ${DOLLAR}document_root${DOLLAR}fastcgi_script_name;
+        fastcgi_param PATH_INFO ${DOLLAR}fastcgi_path_info;
+        fastcgi_read_timeout 99999999;
+        internal;
+    }
+
+    access_log /var/log/nginx/${LOG}-access.log;
+    error_log /var/log/nginx/${LOG}-errors.log;
+}

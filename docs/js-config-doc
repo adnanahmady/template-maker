@@ -1,0 +1,12 @@
+#! /bin/sh
+
+. "${PROJECT_PATH:-$(dirname "$0")/..}"/utils/printer
+
+printInWhite "${JS_COMMAND}"
+space
+printInDark "Creates a nginx JS configuration for you at the specified output path."
+newLine
+tab
+printInBlue "outputPath"
+tab
+printInDark "This argument has no name and you should only path the value."
